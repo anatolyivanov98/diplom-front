@@ -43,7 +43,7 @@ export default {
     },
     async getList({commit}) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:5000/table')
+        axios.get('https://tusur.herokuapp.com/table')
           .then(resp => {
             resolve(resp)
             commit('setList', resp)
@@ -56,7 +56,7 @@ export default {
     },
     async changeFile({dispatch, commit}, formData) {
       return new Promise((resolve, reject) => {
-        axios.post( 'http://localhost:5000/table',
+        axios.post( 'https://tusur.herokuapp.com/table',
           formData,
           {
             headers: {
@@ -75,7 +75,7 @@ export default {
     },
     async getListColumnChooseChart({commit}) {
       return new Promise((resolve, reject) => {
-        axios.get('http://localhost:5000/graphs')
+        axios.get('https://tusur.herokuapp.com/graphs')
           .then(resp => {
             resolve(resp)
             commit('setListColumnChooseChart', resp)
@@ -88,7 +88,7 @@ export default {
     },
     async buildChart({dispatch, commit}, formData) {
       return new Promise((resolve, reject) => {
-        axios.post( 'http://localhost:5000/graphs',
+        axios.post( 'https://tusur.herokuapp.com/graphs',
           formData,
           {
             headers: {
