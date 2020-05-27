@@ -24,7 +24,7 @@ export default {
   actions: {
     async uploadFile({dispatch, commit}, formData) {
       return new Promise((resolve, reject) => {
-        axios.post( 'https://tusur.herokuapp.com/',
+        axios.post( 'https://cors-anywhere.herokuapp.com/tusur.herokuapp.com/',
           formData,
           {
             headers: {
