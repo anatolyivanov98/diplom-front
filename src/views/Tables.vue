@@ -19,8 +19,8 @@
           <div class="table-button">
             <button class="btn" @click="openAction">Предварительная обработка данных</button>
             <button class="btn" @click="openChooseChart">График</button>
-            <button class="btn" @click="uploadNewFile">Загрузить новый файл</button>
-            <button class="btn">Кнопка 4</button>
+            <button class="btn" @click="openRequest">Запросы</button>
+            <button class="btn light-blue" @click="uploadNewFile">Загрузить новый файл</button>
           </div>
 
           <ChangeTable v-if="action" @changetable="changeTable"/>
@@ -43,6 +43,8 @@
             <ChartStackedBar />
           </div>
 
+          <Request v-if="isRequest" @request="requestHandler"/>
+
           <div class="table-body">
             <table>
               <tr v-for="i in file">
@@ -63,6 +65,7 @@
   import ChooseChart from "../components/ChooseChart";
   import ChangeTable from "../components/ChangeTable";
   import ChartStackedBar from "../components/ChartStackedBar";
+  import Request from "../components/Request";
 
   export default {
     name: 'tables',
@@ -72,7 +75,8 @@
       ChartBar,
       ChartPie,
       ChartStackedBar,
-      ChooseChart
+      ChooseChart,
+      Request
     },
     data:()=>({
       loader: true,
@@ -82,7 +86,8 @@
       isChartLine: false,
       isChartBar:false,
       isChartPie: false,
-      isChartStackedBar: false
+      isChartStackedBar: false,
+      isRequest: false
     }),
     methods: {
       uploadNewFile() {
@@ -95,6 +100,7 @@
         this.isChartLine = false
         this.isChartPie = false
         this.isChartBar = false
+        this.isRequest = false
         // this.isChartStackedBar = false
       },
       async changeTable() {
@@ -115,6 +121,7 @@
         this.isChartBar = false
         this.action = false
         this.isChartStackedBar = false
+        this.isRequest = false
         this.isChooseChart = !this.isChooseChart
       },
       chooseChartHandler() {
@@ -129,6 +136,19 @@
         } else if(chartType.GraphType === 'StackedBar') {
           this.isChartStackedBar = true
         }
+      },
+      //  Блок Request
+      openRequest() {
+        this.isRequest = !this.isRequest
+        this.isChartLine = false
+        this.isChartPie = false
+        this.isChartBar = false
+        this.action = false
+        this.isChartStackedBar = false
+        this.isChooseChart = false
+      },
+      requestHandler() {
+        this.isRequest = !this.isRequest
       }
     },
     mounted() {
