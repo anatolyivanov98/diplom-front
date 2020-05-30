@@ -2,10 +2,12 @@ import axios from 'axios'
 
 export default {
   state: {
-
+    table: ''
   },
   mutations: {
-
+    setTable(state, table){
+      state.table = table.data
+    }
   },
   actions: {
     async requestApply({dispatch, commit}, formData) {
@@ -20,6 +22,7 @@ export default {
           }
         ).then(resp => {
           resolve(resp)
+          commit('setTable', resp)
         })
           .catch(err => {
             reject(err)

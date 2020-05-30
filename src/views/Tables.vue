@@ -45,6 +45,8 @@
 
           <Request v-if="isRequest" @request="requestHandler"/>
 
+          <RequestTable v-if="isRequestTable"/>
+
           <div class="table-body">
             <table>
               <tr v-for="i in file">
@@ -66,6 +68,7 @@
   import ChangeTable from "../components/ChangeTable";
   import ChartStackedBar from "../components/ChartStackedBar";
   import Request from "../components/Request";
+  import RequestTable from "../components/RequestTable";
 
   export default {
     name: 'tables',
@@ -76,7 +79,8 @@
       ChartPie,
       ChartStackedBar,
       ChooseChart,
-      Request
+      Request,
+      RequestTable,
     },
     data:()=>({
       loader: true,
@@ -87,7 +91,8 @@
       isChartBar:false,
       isChartPie: false,
       isChartStackedBar: false,
-      isRequest: false
+      isRequest: false,
+      isRequestTable: false
     }),
     methods: {
       uploadNewFile() {
@@ -101,7 +106,7 @@
         this.isChartPie = false
         this.isChartBar = false
         this.isRequest = false
-        // this.isChartStackedBar = false
+        this.isChartStackedBar = false
       },
       async changeTable() {
         this.action = !this.action
@@ -146,13 +151,16 @@
         this.action = false
         this.isChartStackedBar = false
         this.isChooseChart = false
+        this.isRequestTable = false
       },
       requestHandler() {
         this.isRequest = !this.isRequest
+        this.isRequestTable = !this.isRequestTable
       }
     },
     mounted() {
       this.file = this.$store.state.table.file.data
+      console.log(this.file)
 
       setTimeout(() => {
         if (this.file.length !== 0) {
