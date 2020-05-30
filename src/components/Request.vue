@@ -146,7 +146,9 @@
             classes: 'red accent-4'
           })
           return
-        } else if ((this.column === this.column2) || (this.column === this.column3) || (this.column2 === this.column3)) {
+        } else if (((this.column.length !== 0 && this.column2.length !== 0 ) && (this.column === this.column2))
+          || ((this.column === this.column3) && (this.column.length !== 0 && this.column3.length !==0))
+          || ((this.column2 === this.column3)&&(this.column2.length!==0 && this.column3.length!==0))) {
           M.toast({
             html: 'Введите разные столбцы',
             displayLength: 2000,

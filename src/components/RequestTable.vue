@@ -35,7 +35,7 @@
     .table-body {
       padding: 0 10px;
       overflow: scroll;
-      height: 500px;
+      max-height: 500px;
       margin-bottom: 30px;
       table {
         tr:first-child{
