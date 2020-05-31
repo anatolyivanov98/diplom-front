@@ -17,10 +17,14 @@
           <option value="!=">!=</option>
         </select>
         <label>Выберите оператор</label>
-        <button class="btn" :class="{'red lighten-1' :isActiveValue2}" @click="activeValue2">
-          <span v-if="isActiveValue2">Удалить критерий</span>
-          <span v-else>Добавить критерий</span>
-        </button>
+        <div class="button-and-or">
+          <button class="btn" :class="{'red lighten-1' :isActiveValueAnd2}" @click="activeValueAnd2">
+            <span>И</span>
+          </button>
+          <button class="btn" :class="{'red lighten-1' :isActiveValueOr2}" @click="activeValueOr2">
+            <span>ИЛИ</span>
+          </button>
+        </div>
       </div>
       <div class="input-field col s4">
         <input id="value" type="text" v-model="value">
@@ -43,10 +47,14 @@
           <option value="!=">!=</option>
         </select>
         <label>Выберите оператор</label>
-        <button class="btn" :class="{'red lighten-1' :isActiveValue3}" @click="activeValue3">
-          <span v-if="isActiveValue3">Удалить критерий</span>
-          <span v-else>Добавить критерий</span>
-        </button>
+        <div class="button-and-or">
+          <button class="btn" :class="{'red lighten-1' :isActiveValueAnd3}" @click="activeValueAnd3">
+            <span>И</span>
+          </button>
+          <button class="btn" :class="{'red lighten-1' :isActiveValueOr3}" @click="activeValueOr3">
+            <span>ИЛИ</span>
+          </button>
+        </div>
       </div>
       <div class="input-field col s4">
         <input id="value2" type="text" v-model="value2">
@@ -95,17 +103,63 @@
       value2: '',
       value3: '',
       isActiveValue2: false,
-      isActiveValue3: false
+      isActiveValueAnd2: false,
+      isActiveValueOr2: false,
+      isActiveValue3: false,
+      isActiveValueAnd3: false,
+      isActiveValueOr3: false
     }),
     methods: {
-      activeValue2() {
-        this.isActiveValue2 = !this.isActiveValue2
+      activeValueAnd2() {
+        if (this.isActiveValueOr2 && this.isActiveValue2) {
+          this.isActiveValueAnd2 = !this.isActiveValueAnd2
+          this.isActiveValueOr2 = false
+        } else {
+          this.isActiveValue2 = !this.isActiveValue2
+          this.isActiveValueAnd2 = !this.isActiveValueAnd2
+          this.isActiveValueOr2 = false
+        }
+
         setTimeout(() => {
           M.FormSelect.init(this.$refs.select2)
         }, 0)
       },
-      activeValue3() {
-        this.isActiveValue3 = !this.isActiveValue3
+      activeValueOr2() {
+        if (this.isActiveValueAnd2 && this.isActiveValue2) {
+          this.isActiveValueAnd2 = false
+          this.isActiveValueOr2 = !this.isActiveValueOr2
+        } else {
+          this.isActiveValue2 = !this.isActiveValue2
+          this.isActiveValueAnd2 = false
+          this.isActiveValueOr2 = !this.isActiveValueOr2
+        }
+
+        setTimeout(() => {
+          M.FormSelect.init(this.$refs.select2)
+        }, 0)
+      },
+      activeValueAnd3() {
+        if (this.isActiveValueOr3 && this.isActiveValue3) {
+          this.isActiveValueAnd3 = !this.isActiveValueAnd3
+          this.isActiveValueOr3 = false
+        } else {
+          this.isActiveValue3 = !this.isActiveValue3
+          this.isActiveValueAnd3 = !this.isActiveValueAnd3
+          this.isActiveValueOr3 = false
+        }
+        setTimeout(() => {
+          M.FormSelect.init(this.$refs.select3)
+        }, 0)
+      },
+      activeValueOr3() {
+        if (this.isActiveValueAnd3 && this.isActiveValue3) {
+          this.isActiveValueAnd3 = false
+          this.isActiveValueOr3 = !this.isActiveValueOr3
+        } else {
+          this.isActiveValue3 = !this.isActiveValue3
+          this.isActiveValueAnd3 = false
+          this.isActiveValueOr3 = !this.isActiveValueOr3
+        }
         setTimeout(() => {
           M.FormSelect.init(this.$refs.select3)
         }, 0)
@@ -166,6 +220,10 @@
           value: this.value,
           value2: this.value2,
           value3: this.value3,
+          isActiveValueAnd2: this.isActiveValueAnd2,
+          isActiveValueOr2: this.isActiveValueOr2,
+          isActiveValueAnd3: this.isActiveValueAnd3,
+          isActiveValueOr3: this.isActiveValueOr3
         }
         await this.$store.dispatch('requestApply', formData)
         this.$emit('request')
@@ -201,6 +259,16 @@
     p {
       padding: 0 15px;
       font-size: 16px;
+    }
+
+    .button-and-or {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+
+      button {
+        margin: 5px;
+      }
     }
 
     .apply {
