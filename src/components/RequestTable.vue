@@ -30,7 +30,11 @@
         this.$emit('close')
       },
       async saveRequestTable() {
-        await this.$store.dispatch('saveRequestTable')
+        let formData = {
+          saveRequestTable: true,
+          saveMainTable: false
+        }
+        await this.$store.dispatch('saveRequestTable', formData)
       }
     },
     async mounted() {

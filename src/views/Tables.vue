@@ -47,6 +47,9 @@
 
           <RequestTable v-if="isRequestTable" @close="closeRequestTable"/>
 
+          <div class="table-save">
+            <button class="btn" @click="saveMainTable">Сохранить таблицу</button>
+          </div>
           <div class="table-body">
             <table>
               <tr v-for="i in file">
@@ -97,6 +100,13 @@
     methods: {
       uploadNewFile() {
         this.$router.push('/')
+      },
+      async saveMainTable() {
+        let formData = {
+          saveRequestTable: false,
+          saveMainTable: true
+        }
+        await this.$store.dispatch('saveRequestTable', formData)
       },
       // Блок action
       async openAction() {
@@ -198,11 +208,18 @@
         overflow: scroll;
       }
 
+      .table-save {
+        display: flex;
+        justify-content: flex-end;
+        margin: 10px 15px;
+      }
+
       .table-body {
         padding: 0 10px;
         overflow: scroll;
         height: 500px;
         margin-bottom: 0;
+
         table {
           tr:first-child{
             background-color: lightgrey;

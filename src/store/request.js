@@ -11,7 +11,6 @@ export default {
   },
   actions: {
     async requestApply({dispatch, commit}, formData) {
-      console.log(formData)
       return new Promise((resolve, reject) => {
         axios.post( 'https://tusur.herokuapp.com/request',
           formData,
@@ -30,12 +29,18 @@ export default {
           })
       })
     },
-    async saveRequestTable({dispatch , commit}) {
+    async saveRequestTable({dispatch , commit}, formData) {
       return new Promise((resolve, reject) => {
-        axios.get('https://tusur.herokuapp.com/fileSave')
-          .then(resp => {
-            resolve(resp)
-          })
+        axios.post( 'https://tusur.herokuapp.com/fileSave',
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          }
+        ).then(resp => {
+          resolve(resp)
+        })
           .catch(err => {
             reject(err)
             console.log(err)
