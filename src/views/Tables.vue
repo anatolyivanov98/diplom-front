@@ -45,7 +45,7 @@
 
           <Request v-if="isRequest" @request="requestHandler"/>
 
-          <RequestTable v-if="isRequestTable"/>
+          <RequestTable v-if="isRequestTable" @close="closeRequestTable"/>
 
           <div class="table-body">
             <table>
@@ -156,6 +156,9 @@
       requestHandler() {
         this.isRequest = !this.isRequest
         this.isRequestTable = !this.isRequestTable
+      },
+      closeRequestTable() {
+        this.isRequestTable = false
       }
     },
     mounted() {

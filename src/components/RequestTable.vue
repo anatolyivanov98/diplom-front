@@ -1,6 +1,12 @@
 <template>
   <div class="request-table">
-    <p>По данному запросу нашлось {{count + 1}} строк</p>
+    <div class="table-info">
+      <p>По данному запросу нашлось {{count + 1}} строк</p>
+      <div class="info-btn">
+        <button class="btn" @click="saveRequestTable">Сохранить таблицу</button>
+        <button class="btn red darken-1" @click="closeRequestTable"><i class="material-icons">close</i></button>
+      </div>
+    </div>
     <div class="table-body">
       <table>
         <tr v-for="i in table">
@@ -19,6 +25,14 @@
       table: '',
       count: '',
     }),
+    methods: {
+      closeRequestTable() {
+        this.$emit('close')
+      },
+      async saveRequestTable() {
+        await this.$store.dispatch('saveRequestTable')
+      }
+    },
     async mounted() {
       this.table = await this.$store.state.request.table.data
       this.count = await this.$store.state.request.table.amountOfStr
@@ -28,9 +42,19 @@
 
 <style lang="scss" scoped>
   .request-table {
-    p {
-      padding: 15px;
-      font-size: 16px;
+    .table-info {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      p {
+        /*padding: 15px;*/
+        font-size: 16px;
+      }
+      .info-btn {
+        button {
+          margin: 10px;
+        }
+      }
     }
     .table-body {
       padding: 0 10px;

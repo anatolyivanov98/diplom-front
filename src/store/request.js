@@ -30,5 +30,17 @@ export default {
           })
       })
     },
+    async saveRequestTable({dispatch , commit}) {
+      return new Promise((resolve, reject) => {
+        axios.get('https://tusur.herokuapp.com/fileSave')
+          .then(resp => {
+            resolve(resp)
+          })
+          .catch(err => {
+            reject(err)
+            console.log(err)
+          })
+      })
+    },
   }
 }
