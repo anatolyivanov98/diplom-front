@@ -40,6 +40,14 @@ export default {
           }
         ).then(resp => {
           resolve(resp)
+          const fileURL = window.URL.createObjectURL(new Blob([resp.data]));
+          const fileLink = document.createElement('a');
+
+          fileLink.href = fileURL;
+          fileLink.setAttribute('download', 'file.pdf');
+          document.body.appendChild(fileLink);
+
+          fileLink.click();
         })
           .catch(err => {
             reject(err)
