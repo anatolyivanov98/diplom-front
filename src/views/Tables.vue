@@ -48,7 +48,7 @@
           <RequestTable v-if="isRequestTable" @close="closeRequestTable"/>
 
           <div class="table-save">
-            <button class="btn" @click="saveMainTable">Сохранить таблицу</button>
+            <button class="btn" @click="saveMainTable">Сохранить основную таблицу</button>
           </div>
           <div class="table-body">
             <table>

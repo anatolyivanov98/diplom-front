@@ -3,7 +3,7 @@
     <div class="table-info">
       <p>По данному запросу нашлось {{count + 1}} строк</p>
       <div class="info-btn">
-        <button class="btn" @click="saveRequestTable">Сохранить таблицу</button>
+        <button class="btn" @click="saveRequestTable">Сохранить запросную таблицу</button>
         <button class="btn red darken-1" @click="closeRequestTable"><i class="material-icons">close</i></button>
       </div>
     </div>

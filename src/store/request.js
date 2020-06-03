@@ -44,7 +44,7 @@ export default {
           const fileLink = document.createElement('a');
 
           fileLink.href = fileURL;
-          fileLink.setAttribute('download', 'newFile.csv');
+          fileLink.setAttribute('download', 'file.csv');
           document.body.appendChild(fileLink);
 
           fileLink.click();
