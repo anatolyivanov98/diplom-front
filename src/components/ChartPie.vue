@@ -15,8 +15,7 @@
     mounted() {
       console.log('qqwq')
       this.chartData = this.$store.state.table.chartData
-      console.log(this.chartData)
-      this.renderChart({
+      const data = {
         labels: this.chartData.labels[1],
         datasets: [{
           label: this.chartData.header[1],
@@ -39,14 +38,24 @@
           ],
           borderWidth: 1
         }]
-      })
-      // const canvas = document.querySelector('canvas')
-      // canvas.style.width = 80 + '%'
-      // canvas.style.height = 80 + '%'
+      }
+      const options = {
+        defaultFontSize: 16,
+        legend: {
+          labels: {
+            fontSize: 16
+          }
+        }
+      }
+      this.renderChart(data, options)
+      const canvas = document.querySelector('canvas')
+      canvas.style.height = 67 + '%'
+      canvas.style.width = 67 + '%'
+      canvas.style.marginRight = 'auto'
+      canvas.style.marginLeft = 'auto'
     }
   }
 </script>
 
 <style scoped>
-
 </style>

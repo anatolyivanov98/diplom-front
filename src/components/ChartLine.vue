@@ -14,7 +14,7 @@
     extends: Line,
     mounted() {
       this.chartData = this.$store.state.table.chartData
-      this.renderChart({
+      const data = {
         labels: this.chartData.labels[1],
         datasets: [{
           label: this.chartData.header[1],
@@ -26,7 +26,21 @@
           ],
           borderWidth: 1
         }]
-      })
+      }
+      const options = {
+        defaultFontSize: 16,
+        legend: {
+          labels: {
+            fontSize: 16
+          }
+        }
+      }
+      this.renderChart(data, options)
+      const canvas = document.querySelector('canvas')
+      canvas.style.height = 67 + '%'
+      canvas.style.width = 67 + '%'
+      canvas.style.marginRight = 'auto'
+      canvas.style.marginLeft = 'auto'
     }
   }
 </script>

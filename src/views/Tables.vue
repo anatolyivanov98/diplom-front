@@ -173,8 +173,6 @@
     },
     mounted() {
       this.file = this.$store.state.table.file.data
-      console.log(this.file)
-
       setTimeout(() => {
         if (this.file.length !== 0) {
           this.loader = false

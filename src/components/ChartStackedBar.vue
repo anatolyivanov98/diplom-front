@@ -55,6 +55,11 @@
             yAxes: [{
             stacked: true
             }]
+          },
+          legend: {
+            labels: {
+              fontSize: 16
+            }
           }
         }
 
@@ -64,6 +69,11 @@
         }
 
       this.renderChart(allData, chartOptions)
+      const canvas = document.querySelector('canvas')
+      canvas.style.height = 67 + '%'
+      canvas.style.width = 67 + '%'
+      canvas.style.marginRight = 'auto'
+      canvas.style.marginLeft = 'auto'
    }
 }
 

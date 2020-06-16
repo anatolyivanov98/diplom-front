@@ -162,7 +162,6 @@
           return
         }
 
-
         if (this.columnX.length !== 0) {
           this.columnX = this.columnX.split()
         }
@@ -180,7 +179,6 @@
           isPie: this.isPie,
           isStackedBar: this.isStackedBar
         }
-        console.log(formData)
         await this.$store.dispatch('buildChart', formData)
         this.$emit('choose')
       }
