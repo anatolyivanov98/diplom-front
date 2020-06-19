@@ -17,10 +17,15 @@
 
         <div v-else class="table-main">
           <div class="table-button">
-            <button class="btn" @click="openAction">Предварительная обработка данных</button>
-            <button class="btn" @click="openChooseChart">График</button>
-            <button class="btn" @click="openRequest">Запросы</button>
-            <button class="btn light-blue" @click="uploadNewFile">Загрузить новый файл</button>
+            <div class="table-button-1">
+              <button class="btn" @click="openAction">Предварительная обработка данных</button>
+              <button class="btn" @click="openChooseChart">График</button>
+              <button class="btn" @click="openRequest">Запросы</button>
+              <button class="btn" @click="openSandbox">Песочница</button>
+            </div>
+            <div class="table-button-2">
+              <button class="btn light-blue" @click="uploadNewFile">Загрузить новый файл</button>
+            </div>
           </div>
 
           <ChangeTable v-if="action" @changetable="changeTable"/>
@@ -47,6 +52,8 @@
 
           <RequestTable v-if="isRequestTable" @close="closeRequestTable"/>
 
+          <Sandbox v-if="isSandbox"/>
+
           <div class="table-save">
             <button class="btn" @click="saveMainTable">Сохранить основную таблицу</button>
           </div>
@@ -72,6 +79,7 @@
   import ChartStackedBar from "../components/ChartStackedBar";
   import Request from "../components/Request";
   import RequestTable from "../components/RequestTable";
+  import Sandbox from "../components/Sandbox";
 
   export default {
     name: 'tables',
@@ -84,6 +92,7 @@
       ChooseChart,
       Request,
       RequestTable,
+      Sandbox
     },
     data:()=>({
       loader: true,
@@ -95,7 +104,8 @@
       isChartPie: false,
       isChartStackedBar: false,
       isRequest: false,
-      isRequestTable: false
+      isRequestTable: false,
+      isSandbox: false
     }),
     methods: {
       uploadNewFile() {
@@ -117,6 +127,7 @@
         this.isChartBar = false
         this.isRequest = false
         this.isChartStackedBar = false
+        this.isSandbox = false
       },
       async changeTable() {
         this.action = !this.action
@@ -137,6 +148,7 @@
         this.action = false
         this.isChartStackedBar = false
         this.isRequest = false
+        this.isSandbox = false
         this.isChooseChart = !this.isChooseChart
       },
       chooseChartHandler() {
@@ -162,6 +174,7 @@
         this.isChartStackedBar = false
         this.isChooseChart = false
         this.isRequestTable = false
+        this.isSandbox = false
       },
       requestHandler() {
         this.isRequest = !this.isRequest
@@ -169,6 +182,17 @@
       },
       closeRequestTable() {
         this.isRequestTable = false
+      },
+      // Блок Sandbox
+      openSandbox() {
+        this.isSandbox = !this.isSandbox
+        this.isChooseChart = false
+        this.isChartLine = false
+        this.isChartPie = false
+        this.isChartBar = false
+        this.isRequest = false
+        this.isChartStackedBar = false
+        this.action = false
       }
     },
     mounted() {
@@ -193,10 +217,22 @@
     }
     .table-main {
       .table-button {
-        padding: 20px;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        height: 100px;
+
+        .table-button-1 {
+          display: flex;
+          justify-content: space-between;
+          padding: 20px;
+          height: 60px;
+        }
+        .table-button-2 {
+          display: flex;
+          justify-content: space-between;
+          padding: 20px;
+          height: 60px;
+        }
       }
       .table-chart {
         margin: 10px;
