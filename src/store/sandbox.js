@@ -21,6 +21,7 @@ export default {
           }
         ).then(resp => {
           resolve(resp)
+
           commit('setResult', resp)
         })
           .catch(err => {

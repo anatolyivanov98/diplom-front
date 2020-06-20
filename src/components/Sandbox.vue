@@ -9,7 +9,7 @@
     </div>
     <div class="col s12" v-if="isResult">
       <div class="result">
-        <p v-for="res in result">{{res}}</p>
+        <pre  v-for="res in result">{{res}}</pre>
       </div>
     </div>
   </div>
@@ -33,12 +33,7 @@
         await this.$store.dispatch('sendCode', data)
         let result = this.$store.state.sandbox.result
         let arrResult = []
-        if (this.result.user_stderr !== '') {
-          arrResult = result.user_stderr.split('\n')
-        } else {
-          arrResult = result.user_stdout.split('\n')
-        }
-
+        arrResult = result.output.split('\n')
         this.result = arrResult
         this.isResult = true
 
