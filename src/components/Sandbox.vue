@@ -3,8 +3,14 @@
     <div class="col s12">
       <textarea name="" id="" cols="30" rows="10" placeholder="Введите код" v-model="code"></textarea>
     </div>
-    <div class="col s2 offset-s10">
+    <div class="col s12 sandbox-btn" >
       <button class="btn" @click="runCode">Запустить</button>
+      <button class="btn red darken-1" @click="isResult = false" v-if="isResult">X</button>
+    </div>
+    <div class="col s12" v-if="isResult">
+      <div class="result">
+        <p v-for="res in result">{{res}}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +19,9 @@
   export default {
     name: "Sandbox",
     data: () => ({
-      code: ''
+      code: '',
+      result: '',
+      isResult: false
     }),
     methods:{
       async runCode() {
@@ -23,6 +31,17 @@
           data[`${i}`] = arr[i]
         }
         await this.$store.dispatch('sendCode', data)
+        let result = this.$store.state.sandbox.result
+        let arrResult = []
+        if (this.result.user_stderr !== '') {
+          arrResult = result.user_stderr.split('\n')
+        } else {
+          arrResult = result.user_stdout.split('\n')
+        }
+
+        this.result = arrResult
+        this.isResult = true
+
       }
     }
   }
@@ -44,8 +63,18 @@
       resize: none;
     }
 
-    button {
-      margin: 10px 0 15px 7px;
+    .sandbox-btn {
+      display: flex;
+      justify-content: space-between;
+      button {
+        margin: 10px 0 15px 0;
+      }
+    }
+
+    .result {
+      padding-left: 10px;
+      border: 1px solid darkgrey;
+      margin-bottom: 10px;
     }
   }
 </style>
