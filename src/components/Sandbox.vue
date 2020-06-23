@@ -36,7 +36,6 @@
         arrResult = result.output.split('\n')
         this.result = arrResult
         this.isResult = true
-
       }
     }
   }
@@ -45,7 +44,7 @@
 <style scoped lang="scss">
   .sandbox {
     display: flex;
-    margin: 15px;
+    margin: 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     min-height: 300px;

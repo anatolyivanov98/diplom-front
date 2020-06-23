@@ -264,6 +264,10 @@
           td:first-child {
             background-color: lightgrey;
           }
+          td:hover{
+            background-color: rgba(230, 230, 230, 0.5);
+            box-shadow: 0 0 5px rgba(0,0,0,0.5);
+          }
           .grey {
             background-color: grey;
           }

@@ -61,13 +61,13 @@
         <div class="check-1" @change="action3check1">
           <label>
             <input type="checkbox" v-model="action3_check1"/>
-            <span>Привести заглавные буквы к маленьким</span>
+            <span>Привести заглавные буквы к нижнему регистру</span>
           </label>
         </div>
         <div class="check-2" @change="action3check2">
           <label>
             <input type="checkbox" v-model="action3_check2"/>
-            <span>Убрать знаки препинания</span>
+            <span>Удалить знаки препинания</span>
           </label>
         </div>
         <div class="check-3" @change="action3check3">
@@ -159,7 +159,6 @@
           action3_check2: this.action3_check2,
           action3_check3: this.action3_check3,
         }
-        console.log(formData)
         await this.$store.dispatch('changeFile', formData)
         this.$emit('changetable')
         this.numberColumns = []
@@ -191,8 +190,8 @@
   .table-action {
     display: flex;
     border-radius: 5px;
-    margin: 0 10px 20px 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    margin: 10px 10px 20px 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
     h4{
       font-size: 16px;
       text-align: center;
