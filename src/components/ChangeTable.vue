@@ -190,7 +190,7 @@
   .table-action {
     display: flex;
     border-radius: 5px;
-    margin: 10px 10px 20px 10px;
+    margin: 15px 10px 20px 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     h4{
       font-size: 16px;

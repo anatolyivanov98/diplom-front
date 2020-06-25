@@ -198,7 +198,7 @@
 <style scoped lang="scss">
   .choose {
     display: flex;
-    margin: 10px;
+    margin: 15px 10px 10px 10px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0,0,0,0.5);
     min-height: 200px;

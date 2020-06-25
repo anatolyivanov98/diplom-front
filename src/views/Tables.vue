@@ -25,6 +25,7 @@
             </div>
             <div class="table-button-2">
               <button class="btn light-blue" @click="uploadNewFile">Загрузить новый файл</button>
+              <button class="btn" @click="openStatistic">Описательные статитстики</button>
             </div>
           </div>
 
@@ -54,6 +55,8 @@
 
           <Sandbox v-if="isSandbox"/>
 
+          <Statistic v-if="isStatistic"/>
+
           <div class="table-save">
             <button class="btn" @click="saveMainTable">Сохранить основную таблицу</button>
           </div>
@@ -80,6 +83,7 @@
   import Request from "../components/Request";
   import RequestTable from "../components/RequestTable";
   import Sandbox from "../components/Sandbox";
+  import Statistic from "../components/Statistic";
 
   export default {
     name: 'tables',
@@ -92,7 +96,8 @@
       ChooseChart,
       Request,
       RequestTable,
-      Sandbox
+      Sandbox,
+      Statistic
     },
     data:()=>({
       loader: true,
@@ -105,7 +110,8 @@
       isChartStackedBar: false,
       isRequest: false,
       isRequestTable: false,
-      isSandbox: false
+      isSandbox: false,
+      isStatistic: false
     }),
     methods: {
       uploadNewFile() {
@@ -128,6 +134,7 @@
         this.isRequest = false
         this.isChartStackedBar = false
         this.isSandbox = false
+        this.isStatistic = false
       },
       async changeTable() {
         this.action = !this.action
@@ -149,6 +156,7 @@
         this.isChartStackedBar = false
         this.isRequest = false
         this.isSandbox = false
+        this.isStatistic = false
         this.isChooseChart = !this.isChooseChart
       },
       chooseChartHandler() {
@@ -175,6 +183,7 @@
         this.isChooseChart = false
         this.isRequestTable = false
         this.isSandbox = false
+        this.isStatistic = false
       },
       requestHandler() {
         this.isRequest = !this.isRequest
@@ -186,6 +195,19 @@
       // Блок Sandbox
       openSandbox() {
         this.isSandbox = !this.isSandbox
+        this.isChooseChart = false
+        this.isChartLine = false
+        this.isChartPie = false
+        this.isChartBar = false
+        this.isRequest = false
+        this.isChartStackedBar = false
+        this.action = false
+        this.isStatistic = false
+      },
+      // Блок Statistic
+      openStatistic() {
+        this.isStatistic = !this.isStatistic
+        this.isSandbox = false
         this.isChooseChart = false
         this.isChartLine = false
         this.isChartPie = false
@@ -220,6 +242,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        box-shadow: 0 4px 5px rgba(0,0,0,0.3);
 
         .table-button-1 {
           display: flex;
@@ -231,7 +254,7 @@
           display: flex;
           justify-content: space-between;
           padding: 20px;
-          height: 60px;
+          height: 70px;
         }
       }
       .table-chart {
@@ -245,7 +268,7 @@
       .table-save {
         display: flex;
         justify-content: flex-end;
-        margin: 10px 15px;
+        margin: 15px 15px;
       }
 
       .table-body {
