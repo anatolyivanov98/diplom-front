@@ -11,7 +11,6 @@ export default {
   },
   actions: {
     async statisticCalculate({dispatch, commit}, formData) {
-      console.log(formData)
       return new Promise((resolve, reject) => {
         axios.post( 'https://tusur.herokuapp.com/statistics',
           formData,
@@ -22,7 +21,6 @@ export default {
           }
         ).then(resp => {
           resolve(resp)
-          console.log(resp)
           commit('setCalculateResult', resp)
         })
           .catch(err => {

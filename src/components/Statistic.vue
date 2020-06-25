@@ -24,6 +24,13 @@
     <div class="apply">
       <button class="btn" @click="statisticApply">Вычислить</button>
     </div>
+
+    <div class="col s12" v-if="isCalculate">
+      <div class="result">
+        <pre>Результат {{operation}} равен: {{calculateResult.Value}}</pre>
+        <button class="btn red darken-1" @click="closeCalculateResult"><strong>X</strong></button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -33,7 +40,9 @@
     data:() =>({
       operation: '',
       column: '',
-      list: ['1','2','3','4','5','6','7','8','9','10','11','12']
+      list: ['1','2','3','4','5','6','7','8','9','10','11','12'],
+      isCalculate: false,
+      calculateResult: ''
     }),
     methods: {
       async statisticApply() {
@@ -59,6 +68,14 @@
         }
 
         await this.$store.dispatch('statisticCalculate', formData)
+
+        this.calculateResult = this.$store.state.statistic.statisticResult
+        if (this.calculateResult !== '') {
+          this.isCalculate = true
+        }
+      },
+      closeCalculateResult() {
+        this.isCalculate = false
       }
     },
     mounted() {
@@ -86,6 +103,19 @@
       display: flex;
       justify-content: flex-end;
       padding: 15px;
+    }
+
+    .result {
+      display: flex;
+      justify-content: space-between;
+      padding-left: 10px;
+      border: 1px solid darkgrey;
+      border-radius: 5px;
+      margin-bottom: 10px;
+
+      button {
+        margin: auto 5px;
+      }
     }
   }
 </style>
