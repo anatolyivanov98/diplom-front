@@ -27,7 +27,7 @@
 
     <div class="col s12" v-if="isCalculate">
       <div class="result">
-        <pre>Результат {{operation}} равен: {{calculateResult.Value}}</pre>
+        <pre>Результат операции "{{operation}}" равен: {{calculateResult.Value}}</pre>
         <button class="btn red darken-1" @click="closeCalculateResult"><strong>X</strong></button>
       </div>
     </div>
