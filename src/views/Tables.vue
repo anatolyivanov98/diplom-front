@@ -25,7 +25,7 @@
             </div>
             <div class="table-button-2">
               <button class="btn light-blue" @click="uploadNewFile">Загрузить новый файл</button>
-              <button class="btn" @click="openStatistic">Описательные статитстики</button>
+              <button class="btn" @click="openStatistic">Статистические характеристики столбцов</button>
             </div>
           </div>
 

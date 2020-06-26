@@ -51,6 +51,8 @@
     flex-direction: column;
 
     textarea {
+      max-height: 200px;
+      overflow: scroll;
       margin-top: 10px;
       padding: 5px;
       height: 250px;
@@ -66,6 +68,8 @@
     }
 
     .result {
+      max-height: 200px;
+      overflow: scroll;
       padding-left: 10px;
       border: 1px solid darkgrey;
       margin-bottom: 10px;
